@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAD Currency World - 50 Years of Excellence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.36.0",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "recharts": "https://esm.sh/recharts@^3.6.0"
+  }
+}
+</script>
+</head>
+<body class="bg-slate-50 text-slate-900 selection:bg-teal-100 selection:text-teal-900 font-['Inter']">
+  
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-500/5 blur-[120px] rounded-full -mr-48 -mt-48 pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/5 blur-[120px] rounded-full -ml-48 -mb-48 pointer-events-none"></div>
+
+  <header class="px-6 py-6 border-b border-slate-200 bg-white/70 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-[#00A88F] rounded-full flex items-center justify-center border-2 border-[#0B2E4F]/10">
+          <div class="w-6 h-1 bg-white rounded-full"></div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-black text-[#0B2E4F] text-xl leading-tight">Dar Al Dawa</span>
+          <span class="text-[10px] uppercase tracking-widest text-[#00A88F] font-bold">Trusted Quality</span>
+        </div>
+      </div>
+      <div class="relative group animate-float cursor-default h-16 md:h-20">
+        <svg viewBox="0 0 200 100" class="w-full h-full drop-shadow-xl">
+          <path d="M40 20 Q 20 20 20 40 L 20 60 Q 20 80 40 80 L 160 80 Q 180 80 180 60 L 180 40 Q 180 20 160 20 Z" fill="white" />
+          <text x="50" y="65" font-family="Inter" font-size="48" font-weight="900" fill="#0B2E4F">50</text>
+          <text x="110" y="50" font-family="Inter" font-size="16" font-weight="900" fill="#0B2E4F">YEARS</text>
+          <text x="110" y="70" font-family="Inter" font-size="12" font-weight="500" fill="#00A88F">of Excellence</text>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <main class="p-4 md:p-8 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 min-h-[calc(100vh-120px)]">
+    <!-- Left Column: Converter -->
+    <div class="lg:col-span-7 space-y-6">
+      <div class="bg-white rounded-3xl p-8 shadow-xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden group">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-teal-500/5 rotate-45 translate-x-12 -translate-y-12 transition-transform group-hover:scale-125"></div>
+        <h2 class="text-2xl font-black text-slate-800 mb-6 flex items-center gap-2">
+          <span class="w-2 h-8 bg-[#00A88F] rounded-full"></span>
+          Currency Exchange
+        </h2>
+        <div class="space-y-6">
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Amount to Convert</label>
+            <input id="amount" type="number" value="100" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-2xl font-bold text-[#0B2E4F] outline-none focus:ring-4 focus:ring-teal-500/10 focus:border-[#00A88F] transition-all">
+          </div>
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <div class="flex-1 w-full">
+              <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">From</label>
+              <select id="baseCurrency" class="w-full bg-white border border-slate-200 rounded-2xl px-4 py-4 text-lg font-bold text-slate-700 outline-none focus:border-teal-500"></select>
+            </div>
+            <button id="swapBtn" class="bg-[#0B2E4F] text-white p-4 rounded-full hover:scale-110 active:scale-95 transition-all shadow-lg shadow-[#0B2E4F]/20 mt-6">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            </button>
+            <div class="flex-1 w-full">
+              <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">To</label>
+              <select id="targetCurrency" class="w-full bg-white border border-slate-200 rounded-2xl px-4 py-4 text-lg font-bold text-slate-700 outline-none focus:border-teal-500"></select>
+            </div>
+          </div>
+          <div class="mt-8 p-8 bg-gradient-to-br from-[#0B2E4F] to-[#1a4a75] rounded-3xl text-white shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10"><svg class="w-24 h-24" viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="50" r="40" /></svg></div>
+            <div class="relative z-10">
+              <div class="text-sm font-bold text-teal-300 uppercase tracking-widest mb-1">Converted Amount</div>
+              <div class="flex items-baseline gap-3">
+                <span id="resultValue" class="text-5xl font-black">---</span>
+                <span id="targetLabel" class="text-2xl font-bold text-teal-400">---</span>
+              </div>
+              <div class="mt-4 text-xs text-white/50 flex items-center gap-2">
+                <span class="inline-block w-2 h-2 bg-teal-400 rounded-full animate-pulse"></span>
+                <span id="rateInfo">Live Market Rate Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="quickStats" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
+    </div>
+
+    <!-- Right Column: AI Insights & Charts -->
+    <div class="lg:col-span-5 space-y-8">
+      <div class="bg-white rounded-3xl p-8 shadow-xl shadow-slate-200/50 border border-slate-100 min-h-[280px] flex flex-col justify-between">
+        <div id="aiContainer">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+              <span class="p-2 bg-teal-50 rounded-lg text-teal-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.047a1 1 0 01.897.95V11h7.75a1 1 0 110 2h-7.75v7.003a1 1 0 01-1.897.051l-9-19A1 1 0 012.3.15l9 19a1 1 0 01.1.2V11H.25a1 1 0 110-2h7.75V2a1 1 0 01.897-.953z" clip-rule="evenodd" /></svg>
+              </span>
+              AI Market Insight
+            </h3>
+            <span id="sentimentBadge" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest hidden"></span>
+          </div>
+          <div id="aiContent" class="space-y-4">
+            <div class="animate-pulse space-y-3">
+              <div class="h-4 bg-slate-100 rounded w-3/4"></div>
+              <div class="h-4 bg-slate-100 rounded w-full"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Powered by Gemini AI</span>
+          <button id="refreshAi" class="text-teal-600 hover:text-teal-700 font-bold text-xs flex items-center gap-1 group">
+            Analyze Pair
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+          </button>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-8 shadow-xl shadow-slate-200/50 border border-slate-100">
+        <h3 class="text-lg font-black text-slate-800 mb-6">Market Volatility Index</h3>
+        <div class="h-48 w-full"><canvas id="trendChart"></canvas></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-[#0B2E4F] py-10 mt-12 text-white/60">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <div class="flex flex-col items-center gap-4 mb-6"><div class="w-12 h-1 bg-teal-400 rounded-full"></div><p class="text-white text-sm font-bold">Celebrating 50 Years of Excellence in Healthcare</p></div>
+      <div class="text-xs">© 2025 Dar Al Dawa Development & Investment Co. | Exchange rates provided by Open Exchange API.</div>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
